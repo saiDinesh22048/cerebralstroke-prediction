@@ -14,6 +14,8 @@ with st.expander('Data'):
 
   st.write('**X**')
   X_raw = df.drop('stroke', axis=1)
+  X_raw = df.drop('id', axis=1)
+  X_raw = df.drop('Residence_type', axis=1)
   X_raw
 
   st.write('**y**')
@@ -22,16 +24,18 @@ with st.expander('Data'):
 
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='hypertension', y='age', color='stroke')
-"""
-# Input features
+  
 with st.sidebar:
   st.header('Input features')
-  island = st.selectbox('Island', ('Biscoe', 'Dream', 'Torgersen'))
-  bill_length_mm = st.slider('Bill length (mm)', 32.1, 59.6, 43.9)
-  bill_depth_mm = st.slider('Bill depth (mm)', 13.1, 21.5, 17.2)
-  flipper_length_mm = st.slider('Flipper length (mm)', 172.0, 231.0, 201.0)
-  body_mass_g = st.slider('Body mass (g)', 2700.0, 6300.0, 4207.0)
-  gender = st.selectbox('Gender', ('male', 'female'))
+  gender = st.selectbox('Gender', ('Male', 'Female'))
+  age = st.slider('Age', 25, 60, 43)
+  hypo = st.radio("hypertension", ("Yes", "No"))
+  heart= st.radio("heart disease", ("Yes", "No"))
+  marry_status= st.radio("Marrital Status", ("Yes", "No"))
+  wrk_typ = st.selectbox('Work type', ('Private', 'Self-employed','Never Worked','children','Govt_job'))
+  gls_lvl = st.slider('Glucose level', 0, 600, 85)
+  bmi = st.slider('Bmi', 5, 100, 30)
+  smking_stat= st.selectbox('Smoking status', ('never smoked', 'formerly smoked','smokes'))
   
   # Create a DataFrame for the input features
   data = {'island': island,
