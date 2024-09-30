@@ -55,29 +55,25 @@ with st.expander('Input features'):
   st.write('**Combined input data**')
   input_values
 
-"""
-# Data preparation
-# Encode X
-encode = ['island', 'sex']
-df_penguins = pd.get_dummies(input_penguins, prefix=encode)
+# Custom mapping for 'gender' column
+gender_map = {'Male': 1, 'Female': 0}
+data['gender'] = data['gender'].map(gender_map)
 
-X = df_penguins[1:]
-input_row = df_penguins[:1]
+# Custom mapping for 'ever_married' column
+ever_married_map = {'Yes': 1, 'No': 0}
+data['ever_married'] = data['ever_married'].map(ever_married_map)
 
-# Encode y
-target_mapper = {'Adelie': 0,
-                 'Chinstrap': 1,
-                 'Gentoo': 2}
-def target_encode(val):
-  return target_mapper[val]
+# Special value imputation for 'smoking_status'
+data['smoking_status'] = data['smoking_status'].fillna('Unknown')
 
-y = y_raw.apply(target_encode)
+# Custom mapping for 'smoking_status' column
+smoking_status_map = {'never smoked': 0, 'formerly smoked': 1, 'smokes': 2, 'Unknown': 3}
+data['smoking_status'] = data['smoking_status'].map(smoking_status_map)
 
-with st.expander('Data preparation'):
-  st.write('**Encoded X (input penguin)**')
-  input_row
-  st.write('**Encoded y**')
-  y
+# Custom mapping for 'work_type' column
+work_type_map = {'Private': 0, 'Self-employed': 1, 'Govt_job': 2, 'children': 3, 'Never_worked': 4}
+data['work_type'] = data['work_type'].map(work_type_map)
+
 
 
 # Model training and inference
