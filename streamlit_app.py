@@ -36,7 +36,7 @@ with st.sidebar:
   gls_lvl = st.slider('Glucose level', 0, 600, 85)
   bmi = st.slider('Bmi', 5, 100, 30)
   smking_stat= st.selectbox('Smoking status', ('never smoked', 'formerly smoked','smokes'))
-  
+  """
   # Create a DataFrame for the input features
   data = {'island': island,
           'bill_length_mm': bill_length_mm,
