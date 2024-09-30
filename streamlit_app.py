@@ -9,20 +9,20 @@ st.info('This is app builds a machine learning model!')
 
 with st.expander('Data'):
   st.write('**Raw data**')
-  df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
+  df = pd.read_csv('dataset.csv')
   df
 
   st.write('**X**')
-  X_raw = df.drop('species', axis=1)
+  X_raw = df.drop('stroke', axis=1)
   X_raw
 
   st.write('**y**')
-  y_raw = df.species
+  y_raw = df.stroke
   y_raw
 
 with st.expander('Data visualization'):
-  st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
-
+  st.scatter_chart(data=df, x='gender', y='age', color='stroke')
+"""
 # Input features
 with st.sidebar:
   st.header('Input features')
@@ -118,4 +118,5 @@ st.dataframe(df_prediction_proba,
 
 
 penguins_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
-st.success(str(penguins_species[prediction][0]))
+st.success(str(penguins_species[prediction][0])) 
+"""
