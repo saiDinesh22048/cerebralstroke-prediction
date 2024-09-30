@@ -42,7 +42,7 @@ with st.sidebar:
           'hypertension': hypo,
           'heart_disease': heart,
           'ever_married': marry_status,
-          'work_type': wrk_typ
+          'work_type': wrk_typ,
           'avg_glucose_level': gls_lvl,
           'bmi': bmi,
           'smoking_status': smking_stat}
