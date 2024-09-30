@@ -21,7 +21,7 @@ with st.expander('Data'):
   y_raw
 
 with st.expander('Data visualization'):
-  st.scatter_chart(data=df, x='gender', y='stroke', color='age')
+  st.scatter_chart(data=df, x='hypertension', y='age', color='stroke')
 """
 # Input features
 with st.sidebar:
