@@ -36,24 +36,26 @@ with st.sidebar:
   gls_lvl = st.slider('Glucose level', 0, 600, 85)
   bmi = st.slider('Bmi', 5, 100, 30)
   smking_stat= st.selectbox('Smoking status', ('never smoked', 'formerly smoked','smokes'))
-  """
   # Create a DataFrame for the input features
-  data = {'island': island,
-          'bill_length_mm': bill_length_mm,
-          'bill_depth_mm': bill_depth_mm,
-          'flipper_length_mm': flipper_length_mm,
-          'body_mass_g': body_mass_g,
-          'sex': gender}
+  data = {'gender': gender,
+          'age': age,
+          'hypertension': hypo,
+          'heart_disease': heart,
+          'ever_married': marry_status,
+          'work_type': wrk_typ
+          'avg_glucose_level': gls_lvl,
+          'bmi': bmi,
+          'smoking_status': smking_stat}
   input_df = pd.DataFrame(data, index=[0])
-  input_penguins = pd.concat([input_df, X_raw], axis=0)
+  input_values = pd.concat([input_df, X_raw], axis=0)
 
 with st.expander('Input features'):
-  st.write('**Input penguin**')
+  st.write('**Input values**')
   input_df
-  st.write('**Combined penguins data**')
-  input_penguins
+  st.write('**Combined input data**')
+  input_values
 
-
+"""
 # Data preparation
 # Encode X
 encode = ['island', 'sex']
