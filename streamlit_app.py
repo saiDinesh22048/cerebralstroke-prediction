@@ -21,7 +21,7 @@ with st.expander('Data'):
   y_raw
 
 with st.expander('Data visualization'):
-  st.scatter_chart(data=df, x='gender', y='age', color='stroke')
+  st.scatter_chart(data=df, x='gender', y='stroke', color='age')
 """
 # Input features
 with st.sidebar:
