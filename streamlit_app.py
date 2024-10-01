@@ -49,19 +49,19 @@ with st.sidebar:
           'bmi': bmi,
           'smoking_status': smking_stat}
 
-X_raw['gender'] = label_encoder.fit_transform(X_raw['gender'])
-
-X_raw['ever_married'] = label_encoder.fit_transform(X_raw['ever_married'])
-
-X_raw['smoking_status'] = X_raw['smoking_status'].fillna('Unknown')
-
-X_raw['smoking_status'] = label_encoder.fit_transform(X_raw['smoking_status'])
-
-X_raw['work_type'] = label_encoder.fit_transform(X_raw['work_type'])
-
 
 input_df = pd.DataFrame(data, index=[0])
 input_values = pd.concat([input_df, X_raw], axis=0)
+
+input_values['gender'] = label_encoder.fit_transform(input_values['gender'])
+
+input_values['ever_married'] = label_encoder.fit_transform(input_values['ever_married'])
+
+input_values['smoking_status'] = input_values['smoking_status'].fillna('Unknown')
+
+input_values['smoking_status'] = label_encoder.fit_transform(input_values['smoking_status'])
+
+input_values['work_type'] = label_encoder.fit_transform(input_values['work_type'])
 
 with st.expander('Input features'):
   st.write('**Input values**')
