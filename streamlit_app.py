@@ -75,8 +75,11 @@ input_values['smoking_status'] = label_encoder.fit_transform(input_values['smoki
 input_values['work_type'] = label_encoder.fit_transform(input_values['work_type'])
 
 
-#scaler =StandardScaler()
-#input_values = scaler.fit_transform(input_values)
+input =input_values.iloc[0]
+input_values =input_values.iloc[1:]
+
+scaler =StandardScaler()
+input_values = scaler.fit_transform(input_values)
 
 with st.expander('Input features'):
   st.write('**Input values**')
@@ -84,13 +87,11 @@ with st.expander('Input features'):
   st.write('**Combined input data**')
   input_values
 
-input =input_values.iloc[0]
-input_values =input_values.iloc[1:]
-
 st.write(input_values.shape)
 st.write(y_raw.shape)
-#smote_enn = SMOTEENN()
-#X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
+
+smote_enn = SMOTEENN()
+X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
 
 # Model training and inference
 ## Train the ML model
