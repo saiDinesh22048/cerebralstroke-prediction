@@ -55,6 +55,10 @@ input_values = pd.concat([input_df, X_raw], axis=0)
 
 input_values['gender'] = label_encoder.fit_transform(input_values['gender'])
 
+input_values['hypertension'] = label_encoder.fit_transform(input_values['hypertension'])
+
+input_values['heart_disease'] = label_encoder.fit_transform(input_values['heart_disease'])
+
 input_values['ever_married'] = label_encoder.fit_transform(input_values['ever_married'])
 
 input_values['smoking_status'] = input_values['smoking_status'].fillna('Unknown')
