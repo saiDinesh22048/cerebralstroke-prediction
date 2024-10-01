@@ -3,10 +3,12 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import  StandardScaler
+from imblearn.combine import SMOTEENN
 
-st.title('🤖 Machine Learning App')
+st.title('Cerebral Stroke Predictor')
 
-st.info('This is app builds a machine learning model!')
+st.info('This app predicts the cerebral stroke using a machine learning algorithm!')
 
 with st.expander('Data'):
   st.write('**Raw data**')
@@ -16,6 +18,8 @@ with st.expander('Data'):
   st.write('**X**')
   df = df.drop('id', axis=1)
   df = df.drop('Residence_type', axis=1)
+  df = df[(df['age'] >= 25) & (df['bmi'] <= 60)]
+  df = df.dropna(how='any')
   X_raw= df.drop('stroke', axis=1)
   X_raw
 
@@ -68,6 +72,12 @@ input_values['smoking_status'] = input_values['smoking_status'].fillna('Unknown'
 input_values['smoking_status'] = label_encoder.fit_transform(input_values['smoking_status'])
 
 input_values['work_type'] = label_encoder.fit_transform(input_values['work_type'])
+
+scaler =StandardScaler()
+input_values = scaler.fit_transform(input_values)
+
+smote_enn = SMOTEENN()
+X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
 
 with st.expander('Input features'):
   st.write('**Input values**')
