@@ -78,8 +78,9 @@ input_values['work_type'] = label_encoder.fit_transform(input_values['work_type'
 scaler =StandardScaler()
 input_values = scaler.fit_transform(input_values)
 
-input =input_values.iloc[0]
-input_values =input_values.iloc[1:]
+arr = np.array(input_values)
+input =arr[0, :]
+input_values =arr[1:, :]
 
 with st.expander('Input features'):
   st.write('**Input values**')
