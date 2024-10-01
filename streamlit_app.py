@@ -77,8 +77,8 @@ input_values['work_type'] = label_encoder.fit_transform(input_values['work_type'
 st.write(input_values.shape)
 st.write(y_raw.shape)
 
-scaler =StandardScaler()
-input_values = scaler.fit_transform(input_values)
+#scaler =StandardScaler()
+#input_values = scaler.fit_transform(input_values)
 
 with st.expander('Input features'):
   st.write('**Input values**')
@@ -88,12 +88,12 @@ with st.expander('Input features'):
 
 input =input_values.drop(input_values.index[0])
 input_values =input_values.iloc[1:]
-smote_enn = SMOTEENN()
-X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
+#smote_enn = SMOTEENN()
+#X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
 
 # Model training and inference
 ## Train the ML model
-clf = RandomForestClassifier()
+"""clf = RandomForestClassifier()
 clf.fit(X, y)
 
 ## Apply model to make predictions
@@ -136,3 +136,4 @@ st.dataframe(df_prediction_proba,
 
 penguins_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
 st.success(str(penguins_species[prediction][0])) 
+"""
