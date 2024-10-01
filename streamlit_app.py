@@ -46,14 +46,6 @@ with st.sidebar:
           'avg_glucose_level': gls_lvl,
           'bmi': bmi,
           'smoking_status': smking_stat}
-  input_df = pd.DataFrame(data, index=[0])
-  input_values = pd.concat([input_df, X_raw], axis=0)
-
-with st.expander('Input features'):
-  st.write('**Input values**')
-  input_df
-  st.write('**Combined input data**')
-  input_values
 
 # Custom mapping for 'gender' column
 gender_map = {'Male': 1, 'Female': 0}
@@ -73,6 +65,15 @@ data['smoking_status'] = data['smoking_status'].map(smoking_status_map)
 # Custom mapping for 'work_type' column
 work_type_map = {'Private': 0, 'Self-employed': 1, 'Govt_job': 2, 'children': 3, 'Never_worked': 4}
 data['work_type'] = data['work_type'].map(work_type_map)
+
+input_df = pd.DataFrame(data, index=[0])
+input_values = pd.concat([input_df, X_raw], axis=0)
+
+with st.expander('Input features'):
+  st.write('**Input values**')
+  input_df
+  st.write('**Combined input data**')
+  input_values
 
 
 
