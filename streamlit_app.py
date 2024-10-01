@@ -31,7 +31,9 @@ with st.sidebar:
   gender = st.selectbox('Gender', ('Male', 'Female'))
   age = st.slider('Age', 25, 60, 43)
   hypo = st.radio("hypertension", ("Yes", "No"))
+  hypo = 1 if hypo == "Yes" else 0
   heart= st.radio("heart disease", ("Yes", "No"))
+  heart = 1 if heart == "Yes" else 0
   marry_status= st.radio("Marrital Status", ("Yes", "No"))
   wrk_typ = st.selectbox('Work type', ('Private', 'Self-employed','Never Worked','children','Govt_job'))
   gls_lvl = st.slider('Glucose level', 0, 600, 85)
