@@ -111,4 +111,7 @@ rf_classifier.fit(X_train, y_train)
 
 # Making predictions
 y = rf_classifier.predict(input)
-st.write(y)
+if y[0]==0:
+  st.success("congrats,you have less risk for cerebral stroke")
+else:
+  st.warning("you have high risk for cerebral stroke.please consult a neurologist immideatly")
