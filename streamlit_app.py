@@ -80,18 +80,16 @@ st.write(y_raw.shape)
 scaler =StandardScaler()
 input_values = scaler.fit_transform(input_values)
 
-input =input_values.drop(input_values.index[0], inplace=True)
-input_values =input_values.iloc[1:]
-smote_enn = SMOTEENN()
-X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
-
 with st.expander('Input features'):
   st.write('**Input values**')
   input_df
   st.write('**Combined input data**')
   input_values
 
-
+input =input_values.drop(input_values.index[0], inplace=True)
+input_values =input_values.iloc[1:]
+smote_enn = SMOTEENN()
+X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
 
 # Model training and inference
 ## Train the ML model
