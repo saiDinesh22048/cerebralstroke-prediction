@@ -20,7 +20,7 @@ with st.expander('Data'):
   df = df.drop('id', axis=1)
   df = df.drop('Residence_type', axis=1)
   df = df[(df['age'] >= 25) & (df['bmi'] <= 60)]
-  df = df.dropna(how='any')
+  df['bmi'].fillna(df['bmi'].mean(), inplace=True)
   X_raw= df.drop('stroke', axis=1)
   X_raw
 
@@ -75,11 +75,11 @@ input_values['smoking_status'] = label_encoder.fit_transform(input_values['smoki
 input_values['work_type'] = label_encoder.fit_transform(input_values['work_type'])
 
 
-input =input_values.iloc[0]
-input_values =input_values.iloc[1:]
-
 scaler =StandardScaler()
 input_values = scaler.fit_transform(input_values)
+
+input =input_values.iloc[0]
+input_values =input_values.iloc[1:]
 
 with st.expander('Input features'):
   st.write('**Input values**')
@@ -93,49 +93,21 @@ st.write(y_raw.shape)
 smote_enn = SMOTEENN()
 X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
 
-# Model training and inference
-## Train the ML model
-"""clf = RandomForestClassifier()
-clf.fit(X, y)
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import roc_curve,auc
 
-## Apply model to make predictions
-prediction = clf.predict(input_row)
-prediction_proba = clf.predict_proba(input_row)
+# Splitting the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X_res1, y_res1, test_size=0.2, random_state=42)
 
-df_prediction_proba = pd.DataFrame(prediction_proba)
-df_prediction_proba.columns = ['Adelie', 'Chinstrap', 'Gentoo']
-df_prediction_proba.rename(columns={0: 'Adelie',
-                                 1: 'Chinstrap',
-                                 2: 'Gentoo'})
+# Initializing the Random Forest classifier
+rf_classifier = RandomForestClassifier(random_state=42)
 
-# Display predicted species
-st.subheader('Predicted Species')
-st.dataframe(df_prediction_proba,
-             column_config={
-               'Adelie': st.column_config.ProgressColumn(
-                 'Adelie',
-                 format='%f',
-                 width='medium',
-                 min_value=0,
-                 max_value=1
-               ),
-               'Chinstrap': st.column_config.ProgressColumn(
-                 'Chinstrap',
-                 format='%f',
-                 width='medium',
-                 min_value=0,
-                 max_value=1
-               ),
-               'Gentoo': st.column_config.ProgressColumn(
-                 'Gentoo',
-                 format='%f',
-                 width='medium',
-                 min_value=0,
-                 max_value=1
-               ),
-             }, hide_index=True)
+# Training the classifier
+rf_classifier.fit(X_train, y_train)
 
-
-penguins_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
-st.success(str(penguins_species[prediction][0])) 
-"""
+# Making predictions
+y = rf_classifier.predict(input)
+st.write(y)
