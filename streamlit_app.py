@@ -93,7 +93,7 @@ st.write(y_raw.shape)
 
 smote_enn = SMOTEENN()
 X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
-
+input = input.reshape(1, -1)
 input
 input_values
 
