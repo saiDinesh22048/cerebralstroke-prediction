@@ -34,7 +34,7 @@ with st.expander('Data visualization'):
 with st.sidebar:
   st.header('Input features')
   gender = st.selectbox('Gender', ('Male', 'Female'))
-  age = st.slider('Age', 25, 60, 43)
+  age = st.slider('Age', 25, 100, 43)
   hypo = st.radio("hypertension", ("Yes", "No"))
   hypo = 1 if hypo == "Yes" else 0
   heart= st.radio("heart disease", ("Yes", "No"))
@@ -42,7 +42,7 @@ with st.sidebar:
   marry_status= st.radio("Marrital Status", ("Yes", "No"))
   wrk_typ = st.selectbox('Work type', ('Private', 'Self-employed','Never Worked','children','Govt_job'))
   gls_lvl = st.slider('Glucose level', 0, 600, 85)
-  bmi = st.slider('Bmi', 5, 100, 30)
+  bmi = st.slider('Bmi', 5, 60, 30)
   smking_stat= st.selectbox('Smoking status', ('never smoked', 'formerly smoked','smokes'))
   # Create a DataFrame for the input features
   label_encoder = LabelEncoder()
