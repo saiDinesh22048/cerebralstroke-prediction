@@ -14,9 +14,9 @@ with st.expander('Data'):
   df
 
   st.write('**X**')
-  X_raw = df.drop('stroke', axis=1)
-  X_raw = df.drop('id', axis=1)
-  X_raw = df.drop('Residence_type', axis=1)
+  df = df.drop('id', axis=1)
+  df = df.drop('Residence_type', axis=1)
+  X_raw= df.drop('stroke', axis=1)
   X_raw
 
   st.write('**y**')
