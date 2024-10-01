@@ -15,6 +15,7 @@ with st.expander('Data'):
   df = pd.read_csv('dataset.csv')
   df
 
+
   st.write('**X**')
   df = df.drop('id', axis=1)
   df = df.drop('Residence_type', axis=1)
@@ -26,7 +27,7 @@ with st.expander('Data'):
   st.write('**y**')
   y_raw = df.stroke
   y_raw
-
+y_raw.value_counts()
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='hypertension', y='age', color='stroke')
   
