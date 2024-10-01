@@ -49,19 +49,15 @@ with st.sidebar:
           'bmi': bmi,
           'smoking_status': smking_stat}
 
-label_encoder.fit(data['gender'])
-data['gender'] = label_encoder.transform(data['gender'])
+data['gender'] = label_encoder.fit_transform(data['gender'])
 
-label_encoder.fit(data['ever_married'])
-data['ever_married'] = label_encoder.transform(data['ever_married'])
+data['ever_married'] = label_encoder.fit_transform(data['ever_married'])
 
 data['smoking_status'] = data['smoking_status'].fillna('Unknown')
 
-label_encoder.fit(data['smoking_status'])
-data['smoking_status'] = label_encoder.transform(data['smoking_status'])
+data['smoking_status'] = label_encoder.fit_transform(data['smoking_status'])
 
-label_encoder.fit(data['work_type'])
-data['work_type'] = label_encoder.transform(data['work_type'])
+data['work_type'] = label_encoder.fit_transform(data['work_type'])
 
 
 input_df = pd.DataFrame(data, index=[0])
