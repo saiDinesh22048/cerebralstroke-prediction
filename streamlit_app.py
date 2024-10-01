@@ -47,24 +47,21 @@ with st.sidebar:
           'bmi': bmi,
           'smoking_status': smking_stat}
 
-# Custom mapping for 'gender' column
-gender_map = {'Male': 1, 'Female': 0}
-data['gender'] = data['gender'].map(gender_map)
+# Custom encoding using replace() for 'gender'
+data['gender'] = data['gender'].replace({'Male': 1, 'Female': 0})
 
-# Custom mapping for 'ever_married' column
-ever_married_map = {'Yes': 1, 'No': 0}
-data['ever_married'] = data['ever_married'].map(ever_married_map)
+# Custom encoding using replace() for 'ever_married'
+data['ever_married'] = data['ever_married'].replace({'Yes': 1, 'No': 0})
 
 # Special value imputation for 'smoking_status'
 data['smoking_status'] = data['smoking_status'].fillna('Unknown')
 
-# Custom mapping for 'smoking_status' column
-smoking_status_map = {'never smoked': 0, 'formerly smoked': 1, 'smokes': 2, 'Unknown': 3}
-data['smoking_status'] = data['smoking_status'].map(smoking_status_map)
+# Custom encoding using replace() for 'smoking_status'
+data['smoking_status'] = data['smoking_status'].replace({'never smoked': 0, 'formerly smoked': 1, 'smokes': 2, 'Unknown': 3})
 
-# Custom mapping for 'work_type' column
-work_type_map = {'Private': 0, 'Self-employed': 1, 'Govt_job': 2, 'children': 3, 'Never_worked': 4}
-data['work_type'] = data['work_type'].map(work_type_map)
+# Custom encoding using replace() for 'work_type'
+data['work_type'] = data['work_type'].replace({'Private': 0, 'Self-employed': 1, 'Govt_job': 2, 'children': 3, 'Never_worked': 4})
+
 
 input_df = pd.DataFrame(data, index=[0])
 input_values = pd.concat([input_df, X_raw], axis=0)
