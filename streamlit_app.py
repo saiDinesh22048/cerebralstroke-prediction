@@ -34,7 +34,7 @@ with st.expander('Data visualization'):
 with st.sidebar:
   st.header('Input features')
   gender = st.selectbox('Gender', ('Male', 'Female'))
-  age = st.slider('Age', 25, 100, 43)
+  age = st.slider('Age', 25,100, 43)
   hypo = st.radio("hypertension", ("Yes", "No"))
   hypo = 1 if hypo == "Yes" else 0
   heart= st.radio("heart disease", ("Yes", "No"))
@@ -87,9 +87,6 @@ with st.expander('Input features'):
   input_df
   st.write('**Combined input data**')
   input_values
-
-st.write(input_values.shape)
-st.write(y_raw.shape)
 
 smote_enn = SMOTEENN()
 X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
