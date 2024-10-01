@@ -80,8 +80,8 @@ st.write(y_raw.shape)
 scaler =StandardScaler()
 input_values = scaler.fit_transform(input_values)
 
-input = pd.DataFrame(input_values, index=[0])
-input_values = input_values.drop(0)
+input =input_values.drop(input_values.index[0], inplace=True)
+input_values =input_values.iloc[1:]
 smote_enn = SMOTEENN()
 X_res1, y_res1 = smote_enn.fit_resample(input_values ,y_raw)
 
