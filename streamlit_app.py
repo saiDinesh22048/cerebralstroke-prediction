@@ -27,8 +27,7 @@ with st.expander('Data'):
   st.write('**y**')
   y_raw = df.stroke
   y_raw
-st.write(input_values.shape)
-st.write(y_raw.shape)
+
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='hypertension', y='age', color='stroke')
   
@@ -74,6 +73,9 @@ input_values['smoking_status'] = input_values['smoking_status'].fillna('Unknown'
 input_values['smoking_status'] = label_encoder.fit_transform(input_values['smoking_status'])
 
 input_values['work_type'] = label_encoder.fit_transform(input_values['work_type'])
+
+st.write(input_values.shape)
+st.write(y_raw.shape)
 
 scaler =StandardScaler()
 input_values = scaler.fit_transform(input_values)
