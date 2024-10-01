@@ -27,7 +27,8 @@ with st.expander('Data'):
   st.write('**y**')
   y_raw = df.stroke
   y_raw
-y_raw.value_counts()
+st.write(input_values.shape)
+st.write(y_raw.shape)
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='hypertension', y='age', color='stroke')
   
