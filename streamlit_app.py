@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 
 st.title('🤖 Machine Learning App')
@@ -37,6 +38,7 @@ with st.sidebar:
   bmi = st.slider('Bmi', 5, 100, 30)
   smking_stat= st.selectbox('Smoking status', ('never smoked', 'formerly smoked','smokes'))
   # Create a DataFrame for the input features
+  label_encoder = LabelEncoder()
   data = {'gender': gender,
           'age': age,
           'hypertension': hypo,
@@ -47,20 +49,19 @@ with st.sidebar:
           'bmi': bmi,
           'smoking_status': smking_stat}
 
-# Custom encoding using replace() for 'gender'
-data['gender'] = data['gender'].replace({'Male': 1, 'Female': 0})
+label_encoder.fit(data['gender'])
+data['gender'] = label_encoder.transform(data['gender'])
 
-# Custom encoding using replace() for 'ever_married'
-data['ever_married'] = data['ever_married'].replace({'Yes': 1, 'No': 0})
+label_encoder.fit(data['ever_married'])
+data['ever_married'] = label_encoder.transform(data['ever_married'])
 
-# Special value imputation for 'smoking_status'
 data['smoking_status'] = data['smoking_status'].fillna('Unknown')
 
-# Custom encoding using replace() for 'smoking_status'
-data['smoking_status'] = data['smoking_status'].replace({'never smoked': 0, 'formerly smoked': 1, 'smokes': 2, 'Unknown': 3})
+label_encoder.fit(data['smoking_status'])
+data['smoking_status'] = label_encoder.transform(data['smoking_status'])
 
-# Custom encoding using replace() for 'work_type'
-data['work_type'] = data['work_type'].replace({'Private': 0, 'Self-employed': 1, 'Govt_job': 2, 'children': 3, 'Never_worked': 4})
+label_encoder.fit(data['work_type'])
+data['work_type'] = label_encoder.transform(data['work_type'])
 
 
 input_df = pd.DataFrame(data, index=[0])
