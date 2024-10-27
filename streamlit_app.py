@@ -119,6 +119,7 @@ def predict(input_data: PredictionInput):
     # Making predictions
     y = rf_classifier.predict(input)
     if y[0]==0:
-      return "congrats,you have less risk for cerebral stroke"
+      return {"prediction": "congrats,you have less risk for cerebral stroke"}
     else:
-      return "you have high risk for cerebral stroke.please consult a neurologist immideatly"
+      return {"prediction": "you have high risk for cerebral stroke.please consult a neurologist immideatly"}
+      
