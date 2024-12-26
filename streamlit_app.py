@@ -6,37 +6,17 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import  StandardScaler
 from imblearn.combine import SMOTEENN
 
-import streamlit as st
-from fastapi import FastAPI
-from pydantic import BaseModel
-import uvicorn
-from typing import Union
-
-app = FastAPI()
-
-# Define your input data schema for validation
-class PredictionInput(BaseModel):
-    gender: str
-    age: int
-    hypertension: int
-    heart_disease: int
-    ever_married: str
-    work_type: str
-    avg_glucose_level: float
-    bmi: float
-    smoking_status: str
-
 st.title('Cerebral Stroke Predictor')
 
 st.info('This app predicts the cerebral stroke using a machine learning algorithm!')
 
 with st.expander('Data'):
-  st.write('**Raw data**')
+  st.write('*Raw data*')
   df = pd.read_csv('dataset.csv')
   df
 
 
-  st.write('**X**')
+  st.write('*X*')
   df = df.drop('id', axis=1)
   df = df.drop('Residence_type', axis=1)
   df = df[(df['age'] >= 25) & (df['bmi'] <= 60)]
@@ -44,26 +24,38 @@ with st.expander('Data'):
   X_raw= df.drop('stroke', axis=1)
   X_raw
 
-  st.write('**y**')
+  st.write('*y*')
   y_raw = df.stroke
   y_raw
 
 with st.expander('Data visualization'):
   st.scatter_chart(data=df, x='hypertension', y='age', color='stroke')
   
-@app.post("/predict/")
-def predict(input_data: PredictionInput):
+with st.sidebar:
+  st.header('Input features')
+  gender = st.selectbox('Gender', ('Male', 'Female'))
+  age = st.slider('Age', 25,100, 43)
+  hypo = st.radio("hypertension", ("Yes", "No"))
+  hypo = 1 if hypo == "Yes" else 0
+  heart= st.radio("heart disease", ("Yes", "No"))
+  heart = 1 if heart == "Yes" else 0
+  marry_status= st.radio("Marrital Status", ("Yes", "No"))
+  wrk_typ = st.selectbox('Work type', ('Private', 'Self-employed','Never Worked','children','Govt_job'))
+  gls_lvl = st.slider('Glucose level', 0, 600, 85)
+  bmi = st.slider('Bmi', 5, 60, 30)
+  smking_stat= st.selectbox('Smoking status', ('never smoked', 'formerly smoked','smokes'))
+if st.button("predict"):
     # Create a DataFrame for the input features
     label_encoder = LabelEncoder()
-    data = {'gender': input_data.gender,
-            'age': input_data.age,
-            'hypertension':input_data.hypertension,
-            'heart_disease': input_data.heart_disease,
-            'ever_married': input_data.ever_married,
-            'work_type': input_data.work_type,
-            'avg_glucose_level': input_data.avg_glucose_level,
-            'bmi': input_data.bmi,
-            'smoking_status':input_data.smoking_status}
+    data = {'gender': gender,
+            'age': age,
+            'hypertension': hypo,
+            'heart_disease': heart,
+            'ever_married': marry_status,
+            'work_type': wrk_typ,
+            'avg_glucose_level': gls_lvl,
+            'bmi': bmi,
+            'smoking_status': smking_stat}
     
     
     input_df = pd.DataFrame(data, index=[0])
@@ -92,9 +84,9 @@ def predict(input_data: PredictionInput):
     input_values =arr[1:, :]
     
     with st.expander('Input features'):
-      st.write('**Input values**')
+      st.write('*Input values*')
       input_df
-      st.write('**Combined input data**')
+      st.write('*Combined input data*')
       input_values
     
     smote_enn = SMOTEENN()
@@ -119,7 +111,6 @@ def predict(input_data: PredictionInput):
     # Making predictions
     y = rf_classifier.predict(input)
     if y[0]==0:
-      return {"prediction": "congrats,you have less risk for cerebral stroke"}
+      st.success("congrats,you have less risk for cerebral stroke")
     else:
-      return {"prediction": "you have high risk for cerebral stroke.please consult a neurologist immideatly"}
-      
+      st.warning("you have high risk for cerebral stroke.please consult a neurologist immideatly")
