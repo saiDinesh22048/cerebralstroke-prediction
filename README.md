@@ -1,6 +1,5 @@
 # Cerebral Stroke Prediction
-```
-```
+
 A tool for predicting the risk of cerebral stroke by taking the required inputs from patients.
 Tools/Techniques Used: Streamlit, Machine Learning, Github
 
@@ -13,13 +12,3 @@ Tools/Techniques Used: Streamlit, Machine Learning, Github
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/app-starter-kit?quickstart=1)
 
-## Section Heading
-
-This is filler text, please replace this with text for this section.
-
-## Further Reading
-
-This is filler text, please replace this with a explanatory text about further relevant resources for this repo
-- Resource 1
-- Resource 2
-- Resource 3
