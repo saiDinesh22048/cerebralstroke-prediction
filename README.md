@@ -1,8 +1,9 @@
 # Cerebral Stroke Prediction
 ```
-⬆️ (Replace above with your app's name)
 ```
-ml app for predicting cerebral stroke.
+A tool for predicting the risk of cerebral stroke by taking the required inputs from patients.
+Tools/Techniques Used: Streamlit, Machine Learning, Github
+
 
 ## Demo App
 
